@@ -3,6 +3,8 @@
 s = "Mississippi"
 d = {}
 
+s = s.lower()
+
 for ch in s:
     if ch in d:
         d[ch] += 1
