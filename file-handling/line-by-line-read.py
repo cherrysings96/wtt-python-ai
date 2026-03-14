@@ -1,0 +1,5 @@
+file = open("numbers.txt", "r+")
+file.seek(0)
+line = file.readlines()
+print(line)
+file.close()

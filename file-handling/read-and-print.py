@@ -1,0 +1,5 @@
+file = open("details.txt", 'r')
+file.seek(0)
+data = file.read()
+print(data)
+file.close()
