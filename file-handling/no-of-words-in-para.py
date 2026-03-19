@@ -4,5 +4,5 @@ l = data.split()
 count = 0
 for i in l:
     count += 1
-print(count)
+print(f"Word count in file para2.txt is {count}")
 file.close()
