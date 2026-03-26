@@ -1,0 +1,6 @@
+file = open("data.txt", "w+")
+file.write("hi\nhow are you\nnow")
+file.seek(0)
+lines = file.readlines()
+print(len(lines))
+file.close()
