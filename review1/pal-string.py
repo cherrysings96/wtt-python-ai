@@ -1,11 +1,11 @@
 def pal(s):
-    l = s.lower()
-    rev = l.reverse()
-    if s == rev:
-        print("Palindrome")
+    rev = s[::-1]
+    if rev == s:
+        return "palindrome"
     else:
-        print("Not palindrome")
+        return "not"
 
 
 s = input("Enter the string:")
-pal(s)
+ans = pal(s)
+print(ans)
