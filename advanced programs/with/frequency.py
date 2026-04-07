@@ -5,8 +5,8 @@ f4.seek(0)
 content=f4.read()
 print(content)
 word=input("Enter a word:")
-count=content.count(word)
-print(f"The word '{word}' appears {count} times in the file.")
+count_word=content.count(word)
+print(f"The word '{word}' appears {count_word} times in the file.")
 
 
 
