@@ -1,0 +1,97 @@
+body {
+    background-color: pink;
+    border: 10px solid white;
+    outline: 10px solid navy;
+    padding: 40px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+    background-color: white;
+    width: 350px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease; /* Makes the "lift" smooth */
+}
+
+/* INTERACTION: Card lifts up on hover */
+main:hover {
+    transform: translateY(-10px);
+}
+
+h1 {
+    text-align: center;
+    color: navy;
+    text-decoration: underline aqua 4px;
+    font-style: oblique;
+    margin-top: 0;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Circular image */
+    border: 5px solid aqua;
+    object-fit: cover;
+    transition: rotate 0.5s ease;
+}
+
+/* INTERACTION: Image spins slightly on hover */
+img:hover {
+    rotate: 5deg;
+}
+
+h2 {
+    color: navy;
+    font-size: 1.1rem;
+    border-left: 5px solid aqua;
+    padding-left: 10px;
+    margin-top: 20px;
+}
+
+p {
+    color: #333;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Beautiful description box */
+article p {
+    background-color: aqua;
+    border: 2px dashed navy;
+    padding: 15px;
+    border-radius: 10px;
+    color: navy;
+    font-weight: 500;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    background-color: navy;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, scale 0.2s;
+}
+
+/* INTERACTION: Button changes color and grows */
+button:hover {
+    background-color: aqua;
+    color: navy;
+    scale: 1.1;
+}
