@@ -1,0 +1,29 @@
+body {
+    border: 2px solid purple;
+    background-color: aqua;
+    padding: 15px;
+    width: 300px;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    color: blue;
+    text-align: center;
+    font-style: underline;
+
+}
+
+
+
+p {
+    font-style: italic;
+}
