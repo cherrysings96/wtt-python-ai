@@ -1,0 +1,14 @@
+.box1 {
+    padding: 10px;
+    border: 2px dashed blue;
+}
+
+.box2 {
+    padding: 20px;
+    border: 2px dotted black;
+}
+
+.box3 {
+    padding: 30px;
+    border: 2px solid orange;
+}

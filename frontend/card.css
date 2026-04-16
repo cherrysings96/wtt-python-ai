@@ -1,0 +1,51 @@
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    color:#0077b5;
+}
+
+.card-outline {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: lightblue;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
+
+.card-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.name {
+    margin: 10px 0 5px;
+}
+
+.role {
+    color: gray;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.desc {
+    font-size: 14px;
+    color: black;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.btn {
+    text-decoration: none;
+    background-color: #0077b5;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+.btn:hover {
+    background-color: #005f8d;
+}
