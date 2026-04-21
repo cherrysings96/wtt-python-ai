@@ -1,0 +1,40 @@
+
+body {
+    background-color: #ddd;
+    font-family: Arial;
+    border: 4px solid black;  
+    margin: 20px;            
+    padding: 10px;
+}
+
+
+header, nav, section, article, aside, footer {
+    display: block;
+    padding: 20px;
+    margin: 10px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid black; 
+}
+
+
+header { background-color: red; }
+nav { background-color: teal; }
+section { background-color: orange; }
+article { background-color: darkorange; }
+aside { background-color: pink; }
+footer { background-color: gray; }
+
+
+.main {
+    display: flex;
+}
+
+.left {
+    width: 65%;
+}
+
+aside {
+    width: 35%;
+}

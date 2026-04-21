@@ -1,7 +1,10 @@
 body {
-    background-color: #1a1a1a; /* Dark background */
-    border: 10px solid #adff2f; /* Neon Green border */
-    outline: 10px solid #fff300; /* Lemon Yellow outline */
+    background-color: #1a1a1a;
+    /* Dark background */
+    border: 10px solid #adff2f;
+    /* Neon Green border */
+    outline: 10px solid #fff300;
+    /* Lemon Yellow outline */
     padding: 40px;
     min-height: 100vh;
     box-sizing: border-box;
@@ -12,7 +15,8 @@ body {
 }
 
 article {
-    background-color: #333; /* Dark Grey card */
+    background-color: #333;
+    /* Dark Grey card */
     width: 350px;
     border: 4px dashed #fff300;
     padding: 20px;
@@ -28,18 +32,25 @@ aside img {
 }
 
 h1 {
-    color: #adff2f; /* Neon Green */
+    color: #adff2f;
+    /* Neon Green */
     text-transform: uppercase;
     margin: 15px 0 5px 0;
 }
 
-section p {
+section p,
+ol,li {
     margin: 2px 0;
-    color: #fff300; /* Lemon Yellow */
+    color: #fff300;
+    /* Lemon Yellow */
+}
+
+ol{
+    text-align: center;
 }
 
 /* The description box with a unique fill */
-article > p {
+article>p {
     background-color: #adff2f;
     color: black;
     padding: 10px;
