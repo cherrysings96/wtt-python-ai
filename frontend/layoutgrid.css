@@ -1,0 +1,61 @@
+h1{
+    text-align: center;
+    vertical-align: center;
+}
+
+#layout{
+    display: flex;
+    position: relative;
+    gap: 1px;
+}
+
+.header{
+    background-color: lavender;
+    padding: 80px;
+    margin: 20px;
+    border: 2px black solid;
+    text-align: center;
+}
+
+.navigation{
+    background-color: lavender;
+    padding: 150px 90px;
+    margin: 20px;
+    border: 2px black solid;
+    text-align: center;
+    position: left;
+    
+    
+}
+
+.article{
+    background-color: lavender;
+    padding: 154px 350px;
+    margin: 20px;
+    border: 2px black solid;
+    text-align: center;
+    position: center;
+    width: 200px;
+    
+    
+}
+
+.right-sidebar{
+    background-color: lavender;
+    padding: 150px 90px;
+    margin: 20px;
+    border: 2px black solid;
+    text-align: center;
+    position: right;
+    
+    
+}
+
+.footer{
+    background-color: lavender;
+    padding: 80px;
+    margin: 20px;
+    border: 2px black solid;
+    text-align: center;
+    position: bottom;
+}
