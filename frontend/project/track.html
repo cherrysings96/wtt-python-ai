@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order | Swiggy 2.0</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light site-navbar">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand fw-bold" href="home.html"><span class="brand-mark">S</span>Swiggy 2.0</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto ms-lg-4">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mycart.html">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="track.html">Track</a></li>
+                    <li class="nav-item"><a class="nav-link" href="previous.html">Previous</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Account</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-shell">
+        <header class="page-heading mb-4">
+            <span class="kicker">Live order status</span>
+            <h1>Track your order.</h1>
+            <p id="trackingText">Your order is being prepared and should arrive in 30-40 minutes.</p>
+        </header>
+
+        <section class="panel-card p-4">
+            <div id="trackingSummary" class="order-summary mb-4">
+                <div class="summary-line"><span>Status</span><strong>No active order</strong></div>
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-between gap-2 mb-2">
+                <strong id="currentStatus">Waiting for order</strong>
+                <span class="text-muted" id="timeRemaining">No timer active</span>
+            </div>
+            <div class="progress live-progress" style="height: 18px;">
+                <div id="trackingBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
+            <div class="status-steps">
+                <div class="status-step" data-step="placed">
+                    <div class="status-dot">1</div>
+                    <h2 class="h6">Order placed</h2>
+                    <p class="text-muted mb-0">We received your cart details.</p>
+                </div>
+                <div class="status-step" data-step="preparing">
+                    <div class="status-dot">2</div>
+                    <h2 class="h6">Preparing</h2>
+                    <p class="text-muted mb-0">The kitchen has started cooking.</p>
+                </div>
+                <div class="status-step" data-step="delivery">
+                    <div class="status-dot">3</div>
+                    <h2 class="h6">Out for delivery</h2>
+                    <p class="text-muted mb-0">Your rider is heading to you.</p>
+                </div>
+                <div class="status-step" data-step="delivered">
+                    <div class="status-dot">4</div>
+                    <h2 class="h6">Delivered</h2>
+                    <p class="text-muted mb-0">Almost there.</p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 mt-4">
+                <a href="home.html#categories" class="btn btn-warning">Order again</a>
+                <a href="mycart.html?view=last" class="btn btn-outline-warning">View cart</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const order = JSON.parse(localStorage.getItem("swiggyLastOrder") || "null");
+        const trackingSummary = document.getElementById("trackingSummary");
+        const trackingBar = document.getElementById("trackingBar");
+        const currentStatus = document.getElementById("currentStatus");
+        const timeRemaining = document.getElementById("timeRemaining");
+        const stepCards = Array.from(document.querySelectorAll(".status-step"));
+
+        function escapeHtml(value) {
+            return String(value)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
+        if (order && order.items.length) {
+            const itemNames = order.items.map((item) => item.food).join(", ");
+            document.getElementById("trackingText").textContent = itemNames + " are being tracked in real time.";
+            trackingSummary.innerHTML = order.items.map((item) => `
+                <div class="summary-line"><span>${escapeHtml(item.food)} from ${escapeHtml(item.restaurant)}</span><strong>Qty ${item.quantity}</strong></div>
+            `).join("") + `
+                <div class="summary-line"><span>Delivering to</span><strong>${escapeHtml(order.items[0].address || "Address not provided")}</strong></div>
+                <div class="summary-line"><span>Total paid</span><strong>Rs. ${order.grandTotal}</strong></div>
+            `;
+            startLiveTracking(order);
+        }
+
+        function getTrackingState(progress) {
+            if (progress >= 100) {
+                return {
+                    label: "Delivered",
+                    text: "Your order has been delivered.",
+                    activeSteps: ["placed", "preparing", "delivery", "delivered"]
+                };
+            }
+
+            if (progress >= 65) {
+                return {
+                    label: "Out for delivery",
+                    text: "Your rider is heading to your address.",
+                    activeSteps: ["placed", "preparing", "delivery"]
+                };
+            }
+
+            if (progress >= 25) {
+                return {
+                    label: "Preparing",
+                    text: "The restaurant is preparing your food.",
+                    activeSteps: ["placed", "preparing"]
+                };
+            }
+
+            return {
+                label: "Order placed",
+                text: "The restaurant has received your order.",
+                activeSteps: ["placed"]
+            };
+        }
+
+        function formatRemaining(milliseconds) {
+            if (milliseconds <= 0) return "Delivered now";
+
+            const totalSeconds = Math.ceil(milliseconds / 1000);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+
+            if (minutes > 0) {
+                return `${minutes} min ${seconds.toString().padStart(2, "0")} sec left`;
+            }
+
+            return `${seconds} sec left`;
+        }
+
+        function updateStepCards(activeSteps) {
+            stepCards.forEach((card, index) => {
+                const isDone = activeSteps.includes(card.dataset.step);
+                const dot = card.querySelector(".status-dot");
+
+                card.classList.toggle("done", isDone);
+                dot.textContent = isDone ? "OK" : String(index + 1);
+                dot.classList.toggle("muted", !isDone);
+            });
+        }
+
+        function startLiveTracking(activeOrder) {
+            const placedAt = Number(activeOrder.placedAt) || Date.now();
+            const deliveryMinutes = Number(activeOrder.deliveryMinutes) || 40;
+            const deliveryDuration = deliveryMinutes * 60 * 1000;
+            const progressAtOpen = Math.min(Number(activeOrder.trackingProgress || 0) + 8, 100);
+            const openedAt = Date.now();
+            let timerId;
+
+            function tick() {
+                const elapsed = Date.now() - placedAt;
+                const pageElapsed = Date.now() - openedAt;
+                const remaining = Math.max(deliveryDuration - elapsed, 0);
+                const realProgress = (elapsed / deliveryDuration) * 100;
+                const visibleProgress = progressAtOpen + (pageElapsed / deliveryDuration) * 100;
+                const progress = Math.min(Math.max(realProgress, visibleProgress, 0), 100);
+                const state = getTrackingState(progress);
+
+                trackingBar.style.width = progress + "%";
+                trackingBar.setAttribute("aria-valuenow", Math.round(progress));
+                trackingBar.textContent = Math.round(progress) + "%";
+                currentStatus.textContent = state.label;
+                timeRemaining.textContent = formatRemaining(remaining);
+                document.getElementById("trackingText").textContent = state.text;
+                updateStepCards(state.activeSteps);
+                activeOrder.trackingProgress = progress;
+                localStorage.setItem("swiggyLastOrder", JSON.stringify(activeOrder));
+
+                if (progress >= 100) {
+                    trackingBar.classList.remove("progress-bar-animated");
+                    if (timerId) clearInterval(timerId);
+                }
+            }
+
+            tick();
+            timerId = setInterval(tick, 1000);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

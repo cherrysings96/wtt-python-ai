@@ -1,0 +1,52 @@
+// Manual definitions from Bootstrap 5.0 palette
+$indigo:     #6610f2;
+$indigo-100: #e0cffc; // Added missing variable
+$teal:       #20c997;
+$teal-100:   #d2f4ea;
+$pink:       #d63384;
+$pink-100:   #f7d6e6;
+$gray-100:   #f8f9fa;
+
+body {
+    // Overriding the previous background-color with your preferred light tint
+    background-color: #fcfaff; 
+}
+
+// 1. Remove the gap between navbar and heading
+.navbar {
+    margin-bottom: 0 !important;
+}
+
+h1.display-2 {
+    color: $indigo;
+    background-color: $indigo-100;
+    margin-top: 0; 
+    padding: 2rem 0; 
+    font-weight: 600;
+    text-align: center; // Usually looks better for display headings
+
+    // 2. Removing the green underline
+    &::after {
+        display: none;
+    }
+
+    border-bottom: 1px solid rgba($indigo, 0.1);
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+
+    // Sports (Teal) - First two cards
+    &:nth-child(-n+2) {
+        background-color: $teal-100;
+        border-top: 4px solid $teal;
+    }
+
+    // Cosmetics (Pink) - Cards from the third one onwards
+    &:nth-child(n+3) {
+        background-color: $pink-100;
+        border-top: 4px solid $pink;
+    }
+}

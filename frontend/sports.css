@@ -1,0 +1,33 @@
+body {
+  background-color: #fcfaff;
+}
+
+h1.display-2 {
+  color: #6610f2;
+  background-color: #e0cffc;
+  padding: 2rem 0;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(102, 16, 242, 0.1);
+}
+
+.card {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Sports Styling */
+.card-sports {
+  background-color: #d2f4ea;
+  border-top: 4px solid #20c997;
+}
+
+/* Beauty Styling */
+.card-beauty {
+  background-color: #f7d6e6;
+  border-top: 4px solid #d63384;
+}

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sherene Antony | Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .hero-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .project-card {
+            transition: transform 0.3s;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-badge {
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            margin: 5px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .hobby-card {
+            border: none;
+            background: #fff;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+        }
+
+        .hobby-card:hover {
+            background-color: var(--primary-color);
+            color: white !important;
+        }
+
+        .hobby-card:hover .text-muted,
+        .hobby-card:hover .bi {
+            color: white !important;
+        }
+
+        .hobby-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        .experience-timeline .current-badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Timeline</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary text-white ms-lg-3" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold text-dark">Hi, I'm <span class="text-primary text-uppercase">Sherene Antony</span></h1>
+            <p class="lead mb-4 text-secondary">Frontend Developer specializing in responsive, mobile-first web design.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="#projects" class="btn btn-primary btn-lg px-4 gap-3">View My Work</a>
+                <a href="#contact" class="btn btn-outline-secondary btn-lg px-4">Let's Talk</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="bg-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h2 class="fw-bold mb-4">About Me</h2>
+                    <p class="lead mb-3">
+                        I hold a <strong>B.Tech in IT from LBSITW (KTU) with a CGPA of 7.04</strong>.
+                    </p>
+                    <p class="text-muted">
+                        With over <strong>3+ years of professional work experience</strong>, I have developed technical solutions
+                        at <strong>Allianz</strong>, <strong>UST</strong>, and for global clients like <strong>BMW</strong>.
+                        My journey spans from Full Stack development and Quality Assurance to specialized Enterprise CMS roles,
+                        now evolving into the field of AI and Python development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Professional Timeline</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="experience-timeline">
+                        <!-- WTT (Current) -->
+                        <div class="mb-5 p-4 bg-white rounded shadow-sm border-start border-primary border-4">
+                            <span class="current-badge mb-2 d-inline-block">Present</span>
+                            <h4 class="text-primary fw-bold">WTT (White Tree Technologies)</h4>
+                            <p class="text-dark fw-bold mb-1">Intern - Full Stack Python with AI</p>
+                            <p class="text-muted small">Specializing in building intelligent web applications using 
+                                <strong>Python</strong> and <strong>Flask</strong>. I am currently integrating AI/ML models into web interfaces to enhance automation and user experience.
+                            </p>
+                        </div>
+
+                        <!-- Allianz -->
+                        <div class="mb-5 p-4 bg-white rounded shadow-sm">
+                            <h4 class="fw-bold">Allianz</h4>
+                            <p class="text-muted fw-bold mb-1">UK Voice Process | PetPlan</p>
+                            <p class="small">Managed international customer relations for <strong>PetPlan UK</strong>, providing high-level support and professional communication regarding insurance policies while maintaining strict global service standards.</p>
+                        </div>
+
+                        <!-- Plan.Net -->
+                        <div class="mb-5 p-4 bg-white rounded shadow-sm">
+                            <h4 class="fw-bold">Plan.Net TechNest</h4>
+                            <p class="text-muted fw-bold mb-1">AEM Development Specialist | Client: <strong>BMW</strong></p>
+                            <p class="small">Developed premium digital components for <strong>BMW's</strong> global web platforms using <strong>Adobe Experience Manager (AEM)</strong>, ensuring cross-browser compatibility and technical excellence.</p>
+                        </div>
+
+                        <!-- UST -->
+                        <div class="mb-5 p-4 bg-white rounded shadow-sm">
+                            <h4 class="fw-bold">UST</h4>
+                            <p class="text-muted fw-bold mb-1">Frontend Developer | Client: <strong>Wolters Kluwer</strong></p>
+                            <p class="small">Engineered responsive, mobile-first web interfaces for <strong>Wolters Kluwer</strong>. Focused on optimizing frontend performance and accessibility using modern styling frameworks.</p>
+                        </div>
+
+                        <!-- Xcubated -->
+                        <div class="mb-5 p-4 bg-white rounded shadow-sm">
+                            <h4 class="fw-bold">Xcubated</h4>
+                            <p class="text-muted fw-bold mb-1">Manual Testing Intern</p>
+                            <p class="small">Conducted comprehensive <strong>manual testing</strong> and bug tracking to ensure application reliability. Collaborated closely with developers to refine software quality.</p>
+                        </div>
+
+                        <!-- CDC -->
+                        <div class="p-4 bg-white rounded shadow-sm">
+                            <h4 class="fw-bold text-dark">CDC</h4>
+                            <p class="text-muted fw-bold mb-1">PERN Full Stack Developer</p>
+                            <p class="small">Architected full-stack applications using the <strong>PERN stack</strong> (PostgreSQL, Express, React, Node.js). Designed relational database schemas and built scalable RESTful APIs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="bg-white">
+        <div class="container text-center">
+            <h2 class="mb-5 fw-bold">Technical Toolkit</h2>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <span class="badge rounded-pill bg-white text-dark border skill-badge shadow-sm">HTML5</span>
+                <span class="badge rounded-pill bg-white text-dark border skill-badge shadow-sm">CSS3</span>
+                <span class="badge rounded-pill bg-white text-dark border skill-badge shadow-sm">Bootstrap 5</span>
+                <span class="badge rounded-pill bg-white text-dark border skill-badge shadow-sm">Responsive Design</span>
+                <span class="badge rounded-pill bg-white text-dark border skill-badge shadow-sm">Flexbox & Grid</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Recent Projects</h2>
+            <div class="row g-4">
+                <!-- Swiggy -->
+                <div class="col-md-4">
+                    <div class="card h-100 project-card shadow-sm d-flex flex-column">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=400&h=250&fit=crop" class="card-img-top" alt="Swiggy 2.0">
+                        <div class="card-body text-center d-flex flex-column">
+                            <h5 class="card-title fw-bold">Swiggy 2.0</h5>
+                            <p class="card-text text-muted small">A revamped food delivery interface with a focus on streamlined navigation and high-impact food imagery.</p>
+                            <a href="../project/login.html" class="btn btn-outline-primary btn-sm w-100 mt-auto">View Live</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Profile Card -->
+                <div class="col-md-4">
+                    <div class="card h-100 project-card shadow-sm border-primary d-flex flex-column">
+                        <img src="../linkedin-sherene.png" class="card-img-top rounded-circle mx-auto mt-3" style="width: 150px; height: 150px; object-fit: cover; border: 5px solid #f8f9fa;" alt="Sherene Antony">
+                        <div class="card-body text-center d-flex flex-column">
+                            <h5 class="card-title fw-bold">Personal Profile Card</h5>
+                            <p class="card-text text-muted small">A modern glassmorphism-inspired card featuring custom CSS hover states and responsive layouts.</p>
+                            <a href="../profileca.html" class="btn btn-outline-primary btn-sm w-100 mt-auto">View Live</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Movie Portal -->
+                <div class="col-md-4">
+                    <div class="card h-100 project-card shadow-sm bg-dark text-white d-flex flex-column">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=400&h=250&fit=crop" class="card-img-top" alt="Movie Portal">
+                        <div class="card-body text-center d-flex flex-column">
+                            <h5 class="card-title fw-bold text-info">Movie Portal</h5>
+                            <p class="card-text text-light opacity-75 small">A cinematic dashboard featuring a dark-mode UI and a responsive grid for film browsing.</p>
+                            <a href="../movies.html" class="btn btn-info btn-sm w-100 mt-auto">View Live</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hobbies" class="bg-white">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Beyond the Code</h2>
+                <p class="text-muted">What I do when I'm not behind a screen</p>
+            </div>
+            <div class="row g-4 text-center justify-content-center">
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="hobby-card p-4 shadow-sm h-100">
+                        <i class="bi bi-trophy hobby-icon mb-3"></i>
+                        <h6 class="fw-bold mb-0">Tennis</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="hobby-card p-4 shadow-sm h-100">
+                        <i class="bi bi-water hobby-icon mb-3"></i>
+                        <h6 class="fw-bold mb-0">Swimming</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="hobby-card p-4 shadow-sm h-100">
+                        <i class="bi bi-book hobby-icon mb-3"></i>
+                        <h6 class="fw-bold mb-0">Reading</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="hobby-card p-4 shadow-sm h-100">
+                        <i class="bi bi-mic hobby-icon mb-3"></i>
+                        <h6 class="fw-bold mb-0">Singing</h6>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="hobby-card p-4 shadow-sm h-100">
+                        <i class="bi bi-music-note-beamed hobby-icon mb-3"></i>
+                        <h6 class="fw-bold mb-0">Instruments</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-light">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">Get In Touch</h2>
+            <p class="mb-5">Currently open for internship or junior developer opportunities!</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm p-4">
+                        <p class="mb-2"><strong>Email:</strong> sherene.antony@gmail.com</p>
+                        <p class="mb-0"><strong>Location:</strong> Thiruvananthapuram, India</p>
+                        <div class="mt-4">
+                            <a href="https://www.linkedin.com/in/sherene-antony/" class="btn btn-primary px-5">Message Me on LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 bg-dark text-white text-center">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Sherene Antony. Built with Bootstrap 5.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
