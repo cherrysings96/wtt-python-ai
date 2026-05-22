@@ -1,1 +1,271 @@
 <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sherene Antony | Portfolio</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:ital@1&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --bg-color: #fdf2f0;
+            --accent-color: #f8a899;
+            --text-dark: #1a1a1a;
+            --radius: 40px;
+        }
+
+        body {
+            background-color: #121212;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            padding: 20px;
+            scroll-behavior: smooth;
+        }
+
+        .bento-wrapper {
+            display: grid;
+            gap: 15px;
+            max-width: 1300px;
+            margin: 0 auto;
+            grid-template-areas:
+                "header header header"
+                "hero portrait timeline"
+                "bio hobbies timeline"
+                "socials contact timeline";
+            grid-template-columns: 1.2fr 0.8fr 1fr;
+            grid-template-rows: auto 350px 250px auto;
+        }
+
+        .tile {
+            background: var(--bg-color);
+            border-radius: var(--radius);
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        /* Areas */
+        .header {
+            grid-area: header;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+
+        .hero {
+            grid-area: hero;
+            justify-content: center;
+        }
+
+        .portrait {
+            grid-area: portrait;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .timeline {
+            grid-area: timeline;
+            overflow-y: auto;
+            max-height: 850px;
+        }
+
+        .bio {
+            grid-area: bio;
+            justify-content: center;
+        }
+
+        .hobbies {
+            grid-area: hobbies;
+            justify-content: center;
+        }
+
+        .contact-cta {
+            grid-area: contact;
+            background-color: var(--accent-color);
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .socials {
+            grid-area: socials;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        /* Typography */
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 0;
+        }
+
+        .hero em {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .brand {
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+        }
+
+        /* Timeline Styling */
+        .timeline-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .timeline-item:last-child {
+            border: none;
+        }
+
+        .badge-current {
+            background: #1a1a1a;
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        /* Images & Icons */
+        .portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hobby-icons i {
+            font-size: 1.5rem;
+            margin-right: 12px;
+            color: var(--accent-color);
+            background: #fff;
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .bento-wrapper {
+                grid-template-areas:
+                    "header" "hero" "portrait" "timeline" "bio" "hobbies" "contact" "socials";
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .timeline {
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bento-wrapper">
+        <!-- Header -->
+        <header class="tile header">
+            <span class="brand text-uppercase">Sherene Antony</span>
+            <nav class="d-none d-md-block">
+                <a href="https://www.linkedin.com/in/sherene-antony/" target="_blank"
+                    class="btn btn-dark rounded-pill px-4 btn-sm">
+                    Let's Talk
+                </a>
+            </nav>
+        </header>
+
+        <!-- Hero -->
+        <section class="tile hero">
+            <h1>Frontend Developer specializing in <em>Responsive</em> Web Design.</h1>
+        </section>
+
+        <!-- Portrait (Your Photo) -->
+        <div class="tile portrait">
+            <img src="../linkedin-sherene.png" alt="Sherene Antony">
+        </div>
+
+        <!-- Professional Timeline -->
+        <div class="tile timeline">
+            <h5 class="fw-bold mb-4">Professional Timeline</h5>
+
+            <div class="timeline-item">
+                <span class="badge-current">Present</span>
+                <h6 class="fw-bold mb-0">WTT (White Tree Technologies)</h6>
+                <p class="small text-muted mb-1">Intern - Full Stack Python with AI</p>
+                <p class="x-small" style="font-size: 0.75rem;">Building intelligent apps with Flask & AI models.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h6 class="fw-bold mb-0">Allianz</h6>
+                <p class="small text-muted mb-1">UK Voice Process | PetPlan</p>
+            </div>
+
+            <div class="timeline-item">
+                <h6 class="fw-bold mb-0">Plan.Net TechNest</h6>
+                <p class="small text-muted mb-1">AEM Specialist | Client: <strong>BMW</strong></p>
+            </div>
+
+            <div class="timeline-item">
+                <h6 class="fw-bold mb-0">UST</h6>
+                <p class="small text-muted mb-1">Frontend Developer | Client: <strong>Wolters Kluwer</strong></p>
+            </div>
+
+            <div class="timeline-item">
+                <h6 class="fw-bold mb-0">CDC</h6>
+                <p class="small text-muted mb-1">PERN Full Stack Developer</p>
+            </div>
+        </div>
+
+        <!-- Bio -->
+        <div class="tile bio">
+            <p class="mb-0"><strong>B.Tech IT (LBSITW)</strong> graduate with 3+ years experience. Evolving from Full
+                Stack to <strong>AI-driven development</strong>.</p>
+        </div>
+
+        <!-- Hobbies -->
+        <div class="tile hobbies">
+            <span class="small fw-bold mb-3">BEYOND THE CODE</span>
+            <div class="hobby-icons">
+                <i class="bi bi-trophy" title="Tennis"></i>
+                <i class="bi bi-mic" title="Singing"></i>
+                <i class="bi bi-book" title="Reading"></i>
+                <i class="bi bi-water" title="Swimming"></i>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <a href="https://www.linkedin.com/in/sherene-antony/" class="tile contact-cta">
+            <span class="small fw-bold">Based in Thiruvananthapuram</span>
+            <h2 class="mb-0">Connect on LinkedIn ↗</h2>
+        </a>
+
+        <!-- Socials -->
+        <div class="tile socials">
+            <a href="https://github.com/cherrysings96/wtt-python-ai" target="_blank"
+                class="text-dark fw-bold small text-decoration-none">GITHUB</a>
+            <a href="https://www.facebook.com/sherene.antony.1/" target="_blank"
+                class="text-dark fw-bold small text-decoration-none">FACEBOOK</a>
+            <a href="https://www.instagram.com/sherene_antony/" target="_blank"
+                class="text-dark fw-bold small text-decoration-none">INSTAGRAM</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

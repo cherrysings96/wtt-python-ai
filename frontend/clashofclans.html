@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clash of Clans × Supercell Clone</title>
+    <style>
+        :root {
+            --sc-black: #000000;
+            --sc-grey: #1a1a1a;
+            --sc-text: #ffffff;
+            --sc-accent: #878787;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--sc-black);
+            color: var(--sc-text);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(0,0,0,0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { width: 100px; }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--sc-text);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://supercell.com/images/4c0ab0c1fb2958e72103f81632fee096/og_clashofclans.f3149338.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-logo {
+            width: 60%;
+            max-width: 500px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+        }
+
+        /* --- Content Sections --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+
+        .grid-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 6rem;
+        }
+
+        .col { flex: 1; min-width: 300px; }
+
+        h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        p { line-height: 1.6; color: #ccc; font-size: 1.1rem; }
+
+        .store-buttons img {
+            height: 45px;
+            margin-right: 10px;
+            margin-top: 20px;
+        }
+
+        /* --- News Section --- */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
+        .news-card {
+            background: var(--sc-grey);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover { transform: translateY(-10px); }
+
+        .news-thumb {
+            width: 100%;
+            height: 200px;
+            background: #333;
+            object-fit: cover;
+        }
+
+        .news-content { padding: 1.5rem; }
+        .news-content h3 { margin: 0 0 10px 0; color: #fff; }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .grid-row { flex-direction: column; text-align: center; }
+            header nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <svg viewBox="0 0 121 98" fill="white"><rect width="100" height="80" rx="10" fill="#333"/></svg>
+            <!-- Replace with actual logo img if available -->
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Games</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <!-- Placeholder for the Clash Logo -->
+        <img src="https://upload.wikimedia.org/wikipedia/en/7/72/Clash_of_Clans_logo.png" alt="Clash Logo" class="hero-logo">
+    </section>
+
+    <div class="container">
+        <!-- Intro Section -->
+        <div class="grid-row">
+            <div class="col">
+                <img src="https://images.squarespace-cdn.com/content/v1/59af2189c534a58c97bd63b3/1550604169601-VSAJ5M6T2I646R54B8O2/Clash-of-Clans.jpg" alt="Intro" style="width:100%; border-radius: 15px;">
+            </div>
+            <div class="col">
+                <h2>LEAD YOUR CLAN TO VICTORY!</h2>
+                <p>Answer the call of the mustache! Join the international fray that is Clash of Clans and the Clash® universe. Customize your village, build an army and crush your opponents.</p>
+                <div class="store-buttons">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store">
+                </div>
+            </div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 4rem;">
+
+        <!-- News Section -->
+        <h2>Clash News</h2>
+        <div class="news-grid">
+            <div class="news-card">
+                <img src="https://clashofclans.com/uploaded-images/sc_clash_vs_skeletons.jpg" alt="News 1" class="news-thumb">
+                <div class="news-content">
+                    <p style="font-size: 0.8rem; color: #878787; margin-bottom: 5px;">Clash of Clans</p>
+                    <h3>Clash vs Skeletons</h3>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="https://clashofclans.com/uploaded-images/june_plan.jpg" alt="News 2" class="news-thumb">
+                <div class="news-content">
+                    <p style="font-size: 0.8rem; color: #878787; margin-bottom: 5px;">Clash of Clans</p>
+                    <h3>The May Plan: Let’s Talk About It</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html> 
