@@ -1,0 +1,9 @@
+Project
+
+dataset from Kaggle
+clean
+eda
+target
+input separate
+train with random forrest
+evaluate
