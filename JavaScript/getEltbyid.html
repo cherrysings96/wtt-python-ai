@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Exercises on Object</title>
+</head>
+
+<body>
+    <!-- <h1 id="heading">hello students</h1>
+    <button onclick="changetext()">click me</button> -->
+
+
+    <p>hello</p>
+    <p>BYE</p>
+    <button onclick="changeText()">Click Me</button>
+</body>
+<script>
+    // let heading = document.getElementById("title");
+    // console.log(heading);
+
+
+    // function changetext() {
+    //     document.getElementById("heading").innerHTML = "welcome students";
+
+    // }
+
+
+    function changeText() {
+
+        let result = document.getElementsByTagName("p");
+        result[0].innerHTML = "welcome";
+        result[1].innerHTML = "hi";
+    }
+
+    //selects first para
+</script>
+
+</html>
