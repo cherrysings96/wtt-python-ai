@@ -1,0 +1,7 @@
+file = open("text.txt", "w+")
+file.write("I\nam a\nPython developer.")
+file.seek(0)
+lines = file.readlines()
+no_of_lines = len(lines)
+print(no_of_lines)
+file.close()

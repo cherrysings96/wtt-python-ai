@@ -1,0 +1,36 @@
+body {
+  background-color: #fcfaff;
+}
+
+.navbar {
+  margin-bottom: 0 !important;
+}
+
+h1.display-2 {
+  color: #6610f2;
+  background-color: #e0cffc;
+  margin-top: 0;
+  padding: 2rem 0;
+  font-weight: 600;
+  text-align: center;
+}
+h1.display-2::after {
+  display: none;
+}
+h1.display-2 {
+  border-bottom: 1px solid rgba(102, 16, 242, 0.1);
+}
+
+.card {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+}
+.card:nth-child(-n+2) {
+  background-color: #d2f4ea;
+  border-top: 4px solid #20c997;
+}
+.card:nth-child(n+3) {
+  background-color: #f7d6e6;
+  border-top: 4px solid #d63384;
+}/*# sourceMappingURL=product.css.map */

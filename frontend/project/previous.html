@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previous Orders | Swiggy 2.0</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light site-navbar">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand fw-bold" href="home.html"><span class="brand-mark">S</span>Swiggy 2.0</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto ms-lg-4">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mycart.html">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="track.html">Track</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="previous.html">Previous</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Account</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-shell">
+        <header class="page-heading mb-4">
+            <span class="kicker">Order history</span>
+            <h1>Previous orders.</h1>
+            <p>Review recently confirmed orders, reopen their details, or reorder the same items.</p>
+        </header>
+
+        <section id="emptyHistory" class="panel-card empty-state">
+            <span class="kicker">No orders yet</span>
+            <h2 class="mt-2">Your previous orders will appear here</h2>
+            <p class="text-muted">Confirm an order from the cart to save it in this list.</p>
+            <a href="home.html#categories" class="btn btn-warning">Start ordering</a>
+        </section>
+
+        <section id="historyContent" class="panel-card p-4" style="display: none;">
+            <div class="d-flex flex-wrap justify-content-between gap-2 mb-3">
+                <div>
+                    <span class="kicker">Saved orders</span>
+                    <h2 class="h3 mt-1 mb-0"><span id="historyCount">0</span> orders</h2>
+                </div>
+                <button class="btn btn-outline-danger btn-compact" type="button" onclick="clearHistory()">Clear history</button>
+            </div>
+            <div id="historyList" class="cart-list"></div>
+        </section>
+    </main>
+
+    <script>
+        const emptyHistory = document.getElementById("emptyHistory");
+        const historyContent = document.getElementById("historyContent");
+        const historyList = document.getElementById("historyList");
+
+        function getHistory() {
+            return JSON.parse(localStorage.getItem("swiggyOrderHistory") || "[]");
+        }
+
+        function saveHistory(history) {
+            localStorage.setItem("swiggyOrderHistory", JSON.stringify(history));
+        }
+
+        function escapeHtml(value) {
+            return String(value)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
+        function formatDate(timestamp) {
+            if (!timestamp) return "Recently";
+            return new Date(timestamp).toLocaleString();
+        }
+
+        function renderHistory() {
+            const history = getHistory();
+
+            if (!history.length) {
+                emptyHistory.style.display = "block";
+                historyContent.style.display = "none";
+                return;
+            }
+
+            emptyHistory.style.display = "none";
+            historyContent.style.display = "block";
+            document.getElementById("historyCount").textContent = history.length;
+            historyList.innerHTML = history.map((order) => {
+                const itemText = order.items.map((item) => `${escapeHtml(item.food)} x ${item.quantity}`).join(", ");
+
+                return `
+                    <div class="cart-item">
+                        <div>
+                            <h3 class="h5 mb-1">Order #${escapeHtml(order.id.slice(-5))}</h3>
+                            <p class="text-muted mb-2">${escapeHtml(formatDate(order.placedAt))}</p>
+                            <div class="meta-row mb-0">
+                                <span>${itemText}</span>
+                                <span>${escapeHtml(order.status || "Confirmed")}</span>
+                                <span>Rs. ${order.grandTotal}</span>
+                            </div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <strong>Rs. ${order.grandTotal}</strong>
+                            <button class="btn btn-sm btn-outline-warning" type="button" onclick="trackOrder('${order.id}')">Track</button>
+                            <button class="btn btn-sm btn-warning" type="button" onclick="reorder('${order.id}')">Reorder</button>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function trackOrder(orderId) {
+            const order = getHistory().find((historyOrder) => historyOrder.id === orderId);
+            if (!order) return;
+
+            localStorage.setItem("swiggyLastOrder", JSON.stringify(order));
+            window.location.href = "track.html";
+        }
+
+        function reorder(orderId) {
+            const order = getHistory().find((historyOrder) => historyOrder.id === orderId);
+            if (!order) return;
+
+            const items = order.items.map((item) => ({
+                ...item,
+                id: Date.now().toString() + Math.random().toString(16).slice(2)
+            }));
+
+            localStorage.setItem("swiggyCart", JSON.stringify(items));
+            window.location.href = "mycart.html";
+        }
+
+        function clearHistory() {
+            localStorage.removeItem("swiggyOrderHistory");
+            renderHistory();
+        }
+
+        renderHistory();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

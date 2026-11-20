@@ -1,0 +1,6 @@
+file = open("student.txt", 'a')
+file.write(" I got 90 marks.")
+file = open("student.txt", 'r')
+data = file.read()
+print(data)
+file.close()

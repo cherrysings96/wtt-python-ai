@@ -1,0 +1,9 @@
+.Create a dictionary with 3 key-value pairs.
+.Add a new key to dictionary.
+·Update a value.
+·Remove a key using pop().
+.Print all keys.
+.Print all values.
+.Loop through dictionary.
+.Create nested dictionary.
+.Check if key exists.

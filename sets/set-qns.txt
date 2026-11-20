@@ -1,0 +1,9 @@
+.Create a set with 5 numbers.
+.Add a new element to a set.
+.Remove an element from a set.
+.Create two sets and find union.
+.Create two sets and find intersection.
+.Find difference between two sets.
+.Check if element exists in set.
+.Remove duplicates from a list using set.
+.Convert list to set and back to list.

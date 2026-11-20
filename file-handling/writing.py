@@ -1,0 +1,6 @@
+file = open("student.txt", 'w+')
+file.write("Hi I am Sherene")
+file.seek(0)
+data = file.read()
+print(data)
+file.close()

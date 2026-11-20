@@ -1,0 +1,72 @@
+/* Page Style */
+body {
+    background-color: #fff0f5;
+    font-family: Arial;
+    text-align: center;
+}
+
+/* Container */
+div {
+    padding: 20px;
+}
+
+/* Heading */
+h1 {
+    font-size: 45px;
+    font-weight: 900;
+    background: linear-gradient(purple, orange);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-stretch: expanded;
+}
+
+/* Paragraph */
+p {
+    font-size: 18px;
+    color: #444;
+}
+
+/* Images */
+img {
+    width: 200px;
+    border-radius: 15px;
+    margin: 10px;
+    border: 2px solid black;
+    transition: 0.3s;
+}
+
+/* Hover on Images */
+img:hover {
+    transform: scale(1.1);
+}
+
+/* Links */
+a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 15px;
+    background-color: teal;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+/* Hover on Links */
+a:hover {
+    background-color: darkblue;
+}
+
+/* Animated Box (no keyframes) */
+div div {
+    width: 80px;
+    height: 80px;
+    background-color: pink;
+    border-radius: 50%;
+    margin: 20px auto;
+    transition: 0.5s;
+}
+
+div div:hover {
+    transform: translateY(100px);
+}

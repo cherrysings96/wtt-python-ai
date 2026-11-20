@@ -1,0 +1,5 @@
+What is the correct extension of a Python file?|.py|.pyt|.pt|.pyw|1
+Which keyword is used to create a function in Python?|fun|define|def|function|3
+What is the output of len(['apple', 'banana', 'cherry'])?|2|3|4|Error|2
+Which data type is ordered, mutable, and allows duplicate members?|List|Tuple|Set|Dictionary|1
+How do you start a 'for' loop in Python?|for x in y:|for x to y:|for each x in y|for x loop y|1

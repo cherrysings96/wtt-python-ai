@@ -1,0 +1,6 @@
+file = open("fruits.txt", "w+")
+file.write("Apple,Banana,Orange")
+file.seek(0)
+data = file.read()
+print(data)
+file.close()

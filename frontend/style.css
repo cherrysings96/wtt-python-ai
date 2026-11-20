@@ -1,0 +1,65 @@
+/* Page Background */
+body {
+    background-color: #f0f8ff;
+    font-family: Arial;
+    text-align: center;
+}
+
+/* Container */
+div {
+    padding: 20px;
+}
+
+/* Heading */
+h1 {
+    font-size: 50px;
+    font-weight: 900;
+    background: linear-gradient(red, blue);
+    -webkit-background-clip: text; 
+    /*used to make color or gradient show through the text itself */
+    color: transparent;
+    font-stretch: expanded;
+}
+
+/* Paragraph */
+p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Image */
+img {
+    width: 250px;
+    border-radius: 20px;
+    border: 3px solid black;
+    margin: 20px;
+}
+
+/* Link */
+a {
+    padding: 10px 20px;
+    background-color: orange;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+/* Hover */
+a:hover {
+    background-color: red;
+}
+
+div div {
+    width: 100px;
+    height: 100px;
+    background-color: purple;
+    border-radius: 50%;
+    margin: 20px auto;
+    transition: 0.5s;
+}
+
+div div:hover {
+    transform: translateX(150px);
+}

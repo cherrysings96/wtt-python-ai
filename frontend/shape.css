@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+}
+
+.box {
+    height: 100px;
+    width: 100%;
+}
+
+/* Pink sections */
+.pink {
+    background-color: pink;
+}
+
+/* Green sections */
+.green {
+    background-color: lightgreen;
+}
