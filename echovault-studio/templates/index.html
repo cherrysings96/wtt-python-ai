@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EchoVault | Vocal Take & Studio Telemetry</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f111a; color: #e2e8f0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        .studio-card { background: #181b28; border: 1px solid #2a2f45; border-radius: 12px; }
+        .accent-gradient { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); }
+        .score-badge { font-size: 0.95rem; font-weight: 700; padding: 6px 12px; border-radius: 8px; }
+        .navbar-custom { background: #131622; }
+        .progress-thin { height: 6px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg border-bottom border-secondary-subtle py-3 mb-4 navbar-custom">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-white d-flex align-items-center gap-2" href="/">
+            <span class="px-2 py-1 rounded accent-gradient text-white">EV</span>
+            EchoVault <span class="badge bg-secondary-subtle text-secondary-emphasis fw-normal ms-2">Vocal Production Telemetry</span>
+        </a>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#newProjectModal">+ New Song Project</button>
+            <button class="btn btn-primary btn-sm accent-gradient border-0" data-bs-toggle="modal" data-bs-target="#newTakeModal">+ Log Vocal Take</button>
+        </div>
+    </div>
+</nav>
+
+<div class="container pb-5">
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Top Studio Telemetry Row -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="studio-card p-3">
+                <div class="text-secondary small text-uppercase fw-semibold">Active Songs</div>
+                <div class="fs-2 fw-bold text-white">{{ stats.project_count or 0 }}</div>
+                <div class="small text-secondary">In repertoire vault</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="studio-card p-3">
+                <div class="text-secondary small text-uppercase fw-semibold">Logged Vocal Takes</div>
+                <div class="fs-2 fw-bold text-info">{{ stats.total_takes or 0 }}</div>
+                <div class="small text-secondary">Tracked across sessions</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="studio-card p-3">
+                <div class="text-secondary small text-uppercase fw-semibold">Avg Mix-Readiness</div>
+                <div class="fs-2 fw-bold text-success">{{ stats.studio_avg_score or 0 }}%</div>
+                <div class="small text-secondary">Weighted pitch/timing/vibe</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="studio-card p-3">
+                <div class="text-secondary small text-uppercase fw-semibold">Vocal Fatigue Alert</div>
+                <div class="fs-2 fw-bold {% if stats.high_strain_count and stats.high_strain_count > 1 %}text-danger{% else %}text-warning{% endif %}">
+                    {{ stats.high_strain_count or 0 }} High-Strain
+                </div>
+                <div class="small text-secondary">Steam & vocal rest tracker</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Song Projects Section -->
+    <h5 class="fw-bold mb-3">Active Repertoire & Key Transpositions</h5>
+    <div class="row g-3 mb-5">
+        {% for p in projects %}
+        <div class="col-md-4">
+            <div class="studio-card p-3 h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge {% if p.status == 'Mastered' %}bg-success{% elif p.status == 'Mixing' %}bg-info text-dark{% else %}bg-warning text-dark{% endif %}">
+                            {{ p.status }}
+                        </span>
+                        <span class="text-secondary small">{{ p.bpm }} BPM</span>
+                    </div>
+                    <h6 class="fw-bold text-white mb-1">{{ p.title }}</h6>
+                    <p class="text-secondary small mb-3">Orig: {{ p.original_artist }}</p>
+
+                    <div class="p-2 rounded bg-dark mb-3 small">
+                        <div class="d-flex justify-content-between">
+                            <span class="text-secondary">Original Key:</span>
+                            <span>{{ p.original_key }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between fw-semibold text-info">
+                            <span>Studio Vocal Key:</span>
+                            <span>{{ p.transposed_key }}</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between small mb-1">
+                            <span class="text-secondary">Best Take Readiness ({{ p.total_takes }} takes)</span>
+                            <span class="fw-bold">{{ p.best_take_score or 0 }}%</span>
+                        </div>
+                        <div class="progress progress-thin">
+                            <div class="progress-bar accent-gradient" data-width="{{ p.best_take_score or 0 }}"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary-subtle">
+                    <form action="{{ url_for('update_status', project_id=p.id) }}" method="POST" class="d-flex gap-1">
+                        <select name="status" class="form-select form-select-sm bg-dark text-light border-secondary" onchange="this.form.submit()">
+                            <option value="Recording" {% if p.status == 'Recording' %}selected{% endif %}>Recording</option>
+                            <option value="Mixing" {% if p.status == 'Mixing' %}selected{% endif %}>Mixing</option>
+                            <option value="Mastered" {% if p.status == 'Mastered' %}selected{% endif %}>Mastered</option>
+                        </select>
+                    </form>
+                    <form action="{{ url_for('delete_project', project_id=p.id) }}" method="POST">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Vocal Takes Telemetry Table -->
+    <h5 class="fw-bold mb-3">Recent Vocal Takes & Mic Chain Log</h5>
+    <div class="studio-card p-3 table-responsive">
+        <table class="table table-dark table-hover align-middle mb-0">
+            <thead>
+                <tr class="text-secondary small text-uppercase">
+                    <th>Song & Take</th>
+                    <th>Section</th>
+                    <th>Mic & Preamp Chain</th>
+                    <th>Pitch / Timing / Vibe</th>
+                    <th>Mix Readiness</th>
+                    <th>Vocal Strain</th>
+                    <th>Producer Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in takes %}
+                <tr>
+                    <td>
+                        <div class="fw-semibold text-white">{{ t.project_title }}</div>
+                        <span class="badge bg-secondary-subtle text-secondary-emphasis">Take #{{ t.take_number }} • {{ t.transposed_key }}</span>
+                    </td>
+                    <td>{{ t.section }}</td>
+                    <td><span class="small font-monospace text-info">{{ t.mic_chain }}</span></td>
+                    <td>
+                        <span class="badge bg-dark border border-secondary">{{ t.pitch_score }}/10</span>
+                        <span class="badge bg-dark border border-secondary">{{ t.timing_score }}/10</span>
+                        <span class="badge bg-dark border border-secondary">{{ t.vibe_score }}/10</span>
+                    </td>
+                    <td>
+                        <span class="score-badge {% if t.composite_score >= 85 %}bg-success-subtle text-success{% elif t.composite_score >= 70 %}bg-info-subtle text-info{% else %}bg-warning-subtle text-warning{% endif %}">
+                            {{ t.composite_score }}%
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge {% if t.vocal_strain == 'High' %}bg-danger{% elif t.vocal_strain == 'Moderate' %}bg-warning text-dark{% else %}bg-success{% endif %}">
+                            {{ t.vocal_strain }}
+                        </span>
+                    </td>
+                    <td class="small text-secondary">{{ t.notes }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal 1: Add Song Project -->
+<div class="modal fade" id="newProjectModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form action="{{ url_for('add_project') }}" method="POST" class="modal-content studio-card">
+            <div class="modal-header border-secondary-subtle">
+                <h5 class="modal-title fw-bold">Add Song Arrangement</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label small">Song / Cover Title</label>
+                    <input type="text" name="title" class="form-control" placeholder="e.g., Someone Like You (Acoustic)" required>
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label class="form-label small">Original Artist</label>
+                        <input type="text" name="original_artist" class="form-control" placeholder="e.g., Adele" required>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label small">Tempo (BPM)</label>
+                        <input type="number" name="bpm" class="form-control" value="95" required>
+                    </div>
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label class="form-label small">Original Key</label>
+                        <input type="text" name="original_key" class="form-control" placeholder="e.g., A Major" required>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label small">Transposed Vocal Key</label>
+                        <input type="text" name="transposed_key" class="form-control" placeholder="e.g., G Major (-2)" required>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label small">Production Stage</label>
+                    <select name="status" class="form-select">
+                        <option value="Recording">Recording</option>
+                        <option value="Mixing">Mixing</option>
+                        <option value="Mastered">Mastered</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer border-secondary-subtle">
+                <button type="submit" class="btn btn-primary accent-gradient border-0 w-100">Create Studio Project</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal 2: Log Vocal Take -->
+<div class="modal fade" id="newTakeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form action="{{ url_for('add_take') }}" method="POST" class="modal-content studio-card">
+            <div class="modal-header border-secondary-subtle">
+                <h5 class="modal-title fw-bold">Log New Vocal Take</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label small">Select Song Project</label>
+                    <select name="project_id" class="form-select" required>
+                        {% for p in projects %}
+                        <option value="{{ p.id }}">{{ p.title }} ({{ p.transposed_key }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label class="form-label small">Song Section</label>
+                        <input type="text" name="section" class="form-control" placeholder="e.g., Final Chorus Belt" required>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label small">Vocal Strain Level</label>
+                        <select name="vocal_strain" class="form-select">
+                            <option value="Low">Low (Comfortable)</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="High">High (Needs Rest)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small">Mic & Gain Chain</label>
+                    <input type="text" name="mic_chain" class="form-control" placeholder="e.g., Shure SM7B + Scarlett 2i2 (Gain 65%)" required>
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-4">
+                        <label class="form-label small">Pitch (1-10)</label>
+                        <input type="number" name="pitch_score" min="1" max="10" value="8" class="form-control" required>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label small">Timing (1-10)</label>
+                        <input type="number" name="timing_score" min="1" max="10" value="8" class="form-control" required>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label small">Vibe/Emotion (1-10)</label>
+                        <input type="number" name="vibe_score" min="1" max="10" value="9" class="form-control" required>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label small">Take Notes</label>
+                    <textarea name="notes" class="form-control" rows="2" placeholder="Breath control notes, comping timestamps..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer border-secondary-subtle">
+                <button type="submit" class="btn btn-primary accent-gradient border-0 w-100">Calculate Score & Save Take</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.querySelectorAll('.progress-bar[data-width]').forEach(bar => {
+        bar.style.width = bar.getAttribute('data-width') + '%';
+    });
+</script>
+</body>
+</html>
